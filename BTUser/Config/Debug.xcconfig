@@ -1,0 +1,2 @@
+// Backend local. No simulador "localhost" funciona; em device físico use o IP do Mac.
+API_BASE_URL = http:/$()/localhost:8080

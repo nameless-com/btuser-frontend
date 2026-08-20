@@ -1,0 +1,41 @@
+name: BTUser
+options:
+  bundleIdPrefix: com.zenixcode
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "16.0"
+  createIntermediateGroups: true
+packages:
+  BTShared:
+    # Em dev: pacote local ao lado. Para GitHub: troque por url + branch.
+    path: ../bt-shared
+configs:
+  Debug: debug
+  Release: release
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+    SWIFT_STRICT_CONCURRENCY: complete
+targets:
+  BTUser:
+    type: application
+    platform: iOS
+    sources: [BTUser]
+    configFiles:
+      Debug: BTUser/Config/Debug.xcconfig
+      Release: BTUser/Config/Release.xcconfig
+    dependencies:
+      - package: BTShared
+    info:
+      path: BTUser/Info.plist
+      properties:
+        CFBundleDisplayName: BTUser
+        UILaunchScreen: {}
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+        API_BASE_URL: $(API_BASE_URL)
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.zenixcode.bt200.user
+        GENERATE_INFOPLIST_FILE: false
+        TARGETED_DEVICE_FAMILY: "1"
